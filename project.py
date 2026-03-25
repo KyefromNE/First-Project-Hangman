@@ -1,0 +1,84 @@
+import random
+import time
+
+# Dictionary with keys (the answer) and the items (Definitions/hints)
+words = {
+    "lightning" : "A shock from the sky",
+    "monitor" : "How are you seeing this message?",
+    "window" : "transparent material used in homes",
+    "picture" : "A moment frozen in time",
+    "binary" : "Values represented by 0s and 1s, used by computer systems.",
+    "monochrome" : "All one colour",
+    "cafeteria" : "Somewhere where you can eat"
+}
+
+# Get the answer for the game from words at random
+answer = random.choice(list(words))
+
+# Grabs the hint/definition
+for i in words.keys():
+    if i == answer:
+        print("Hint:", words.get(answer))
+    else:
+        continue
+
+# Strips the answer to a word alone to prevent hassle later on
+answerstrip = answer.strip("['")
+
+# Puts each letter into a list to be used later on maybe
+lst = []
+for i in answerstrip:
+    lst += i.split(",")
+
+# Amount of lives/guesses the user has
+lives = 10
+alive = True
+completed = False
+# Track guessed letters
+guessed_letters = set()
+
+def update_display(answer, guessed_letters):
+    return [letter if letter in guessed_letters else '_' for letter in answer]
+
+# Print the initial underscores
+print(''.join(update_display(answerstrip, guessed_letters)))
+
+# user guess + checks for completion or failure + checks for more than one letter entered, probably not very efficient lmao
+# I'm 100% going to cringe at this in 2 years time haha
+
+while alive:
+    guess = input("Guess a letter: ").lower()
+    # Prevent little cheaters
+    if len(guess) != 1:
+        print("One letter at a time!")
+        print(''.join(update_display(answerstrip, guessed_letters)))
+        continue
+
+    # Prevents stupidity
+    if guess.lower() in guessed_letters:
+        print("That has already been guessed!")
+        print(''.join(update_display(answerstrip, guessed_letters)))
+        continue
+
+    # Checks if the user guessed a letter correctly
+    if guess.lower() in lst:
+        print("That is a letter!")
+        guessed_letters.add(guess.lower())
+    # but if guess is incorrect, say that it was incorrect and remove a life
+    else:
+        print("That's not a letter!")
+        lives -= 1
+    # checks if the game is over via defeat
+    if lives == 0:
+        print("You lost the game!")
+        alive = False
+    # checks if the game is over via victory (whey hey)
+    if ''.join(update_display(answerstrip, guessed_letters)) == answerstrip:
+        print("You win!")
+        break
+
+    # print the updated underscore hint after all code is executed
+    print(''.join(update_display(answerstrip, guessed_letters)))
+
+# If not using an IDE, this helps see the result when using native python, QOL thing.
+time.sleep(2)
