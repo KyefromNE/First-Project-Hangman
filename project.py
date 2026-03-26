@@ -51,6 +51,11 @@ print(''.join(update_display(answerstrip, guessed_letters)))
 while alive:
     guess = input("Guess a letter: ").lower()
 
+    # Empty guess check
+    if guess == "" or guess == " ":
+        print("You must enter a string")
+        print(''.join(update_display(answerstrip, guessed_letters)))
+        continue
     # Prevent little cheaters
     if len(guess) != 1:
         print("One letter at a time!")
@@ -96,7 +101,8 @@ while alive:
 
     # print the updated underscore hint after all code is executed, then print the incorrect letters.
     print(''.join(update_display(answerstrip, guessed_letters)))
-    print(f"Incorrect letters: {incorrectletters}")
+    if lives < 10:
+        print(f"Incorrect letters: {incorrectletters}")
 
     # depending on the lives left, print the hangman.
     if lives == 9:
@@ -109,8 +115,68 @@ while alive:
         print("|")
         print("|")
         print("___")
-
-    
-
+    elif lives == 7:
+        print("  _____")
+        print("/")
+        print("|")
+        print("|")
+        print("|")
+        print("|")
+        print("|")
+        print("___")
+    elif lives == 6:
+        print("  _____")
+        print("/      |")
+        print("|      |")
+        print("|")
+        print("|")
+        print("|")
+        print("|")
+        print("___")
+    elif lives == 5:
+        print("  _____")
+        print("/      |")
+        print("|      |")
+        print("|      O")
+        print("|")
+        print("|")
+        print("|")
+        print("___")
+    elif lives == 4:
+        print("  _____")
+        print("/      |")
+        print("|      |")
+        print("|      O")
+        print("|      |")
+        print("|      |")
+        print("|")
+        print("___")
+    elif lives == 3:
+        print("  _____")
+        print("/      |")
+        print("|      |")
+        print("|      O")
+        print("|     -|")
+        print("|      |")
+        print("|")
+        print("___")
+    elif lives == 2:
+        print("  _____")
+        print("/      |")
+        print("|      |")
+        print("|      O")
+        print("|     -|-")
+        print("|      |")
+        print("|")
+        print("___")
+    elif lives == 1:
+        print("  _____")
+        print("/      |")
+        print("|      |")
+        print("|      O")
+        print("|     -|-")
+        print("|      |")
+        print("|     /")
+        print("___")
 # If not using an IDE, this helps see the result when using native python, QOL thing.
 time.sleep(2)
