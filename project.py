@@ -1,15 +1,16 @@
 import random
 import time
 
-# Dictionary with keys (the answer) and the items (Definitions/hints)
+# Dictionary with keys (the answers) and the items (Definitions/hints)
 words = {
     "lightning" : "A shock from the sky",
-    "monitor" : "How are you seeing this message?",
+    "monitor" : "A computer screen",
     "window" : "transparent material used in homes",
     "picture" : "A moment frozen in time",
     "binary" : "Values represented by 0s and 1s, used by computer systems.",
     "monochrome" : "All one colour",
-    "cafeteria" : "Somewhere where you can eat"
+    "cafeteria" : "Somewhere where you can eat",
+    "simplistic" : "In a simple style"
 }
 
 # Get the answer for the game from words at random
@@ -48,6 +49,7 @@ print(''.join(update_display(answerstrip, guessed_letters)))
 
 while alive:
     guess = input("Guess a letter: ").lower()
+    incorrectletters = []
     # Prevent little cheaters
     if len(guess) != 1:
         print("One letter at a time!")
@@ -55,7 +57,7 @@ while alive:
         continue
 
     # Prevents stupidity
-    if guess.lower() in guessed_letters:
+    if guess.lower() in guessed_letters or guess.lower() in incorrectletters:
         print("That has already been guessed!")
         print(''.join(update_display(answerstrip, guessed_letters)))
         continue
@@ -64,10 +66,15 @@ while alive:
     if guess.lower() in lst:
         print("That is a letter!")
         guessed_letters.add(guess.lower())
-    # but if guess is incorrect, say that it was incorrect and remove a life
+    
+
+    # but if guess is incorrect, say that it was incorrect and remove a life. After that, add it to the list of incorrect guesses
     else:
         print("That's not a letter!")
         lives -= 1
+        incorrectletters.append(guess)
+
+    
     # checks if the game is over via defeat
     if lives == 0:
         print("You lost the game!")
@@ -77,8 +84,9 @@ while alive:
         print("You win!")
         break
 
-    # print the updated underscore hint after all code is executed
+    # print the updated underscore hint after all code is executed, then print the incorrect letters
     print(''.join(update_display(answerstrip, guessed_letters)))
+    print(f"Incorrect letters: {incorrectletters}")
 
 # If not using an IDE, this helps see the result when using native python, QOL thing.
 time.sleep(2)
