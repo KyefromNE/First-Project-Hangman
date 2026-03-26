@@ -37,6 +37,7 @@ alive = True
 completed = False
 # Track guessed letters
 guessed_letters = set()
+incorrectletters = set()
 
 def update_display(answer, guessed_letters):
     return [letter if letter in guessed_letters else '_' for letter in answer]
@@ -49,7 +50,7 @@ print(''.join(update_display(answerstrip, guessed_letters)))
 
 while alive:
     guess = input("Guess a letter: ").lower()
-    incorrectletters = []
+
     # Prevent little cheaters
     if len(guess) != 1:
         print("One letter at a time!")
@@ -68,11 +69,12 @@ while alive:
         guessed_letters.add(guess.lower())
     
 
-    # but if guess is incorrect, say that it was incorrect and remove a life. After that, add it to the list of incorrect guesses
+    # but if guess is incorrect, say that it was incorrect and remove a life.
     else:
         print("That's not a letter!")
         lives -= 1
-        incorrectletters.append(guess)
+        incorrectletters.add(guess)
+
 
     
     # checks if the game is over via defeat
