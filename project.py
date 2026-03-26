@@ -52,7 +52,7 @@ while alive:
     guess = input("Guess a letter: ").lower()
 
     # Empty guess check
-    if guess == "" or guess == " ":
+    if guess == "" or guess == " " or guess == "\t":
         print("You must enter a string")
         print(''.join(update_display(answerstrip, guessed_letters)))
         continue
