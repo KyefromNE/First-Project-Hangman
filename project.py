@@ -3,14 +3,14 @@ import time
 
 # Dictionary with keys (the answers) and the items (Definitions/hints)
 words = {
-    "lightning" : "A shock from the sky",
-    "monitor" : "A computer screen",
-    "window" : "transparent material used in homes",
-    "picture" : "A moment frozen in time",
-    "binary" : "Values represented by 0s and 1s, used by computer systems.",
-    "monochrome" : "All one colour",
-    "cafeteria" : "Somewhere where you can eat",
-    "simplistic" : "In a simple style"
+    "lightning": "A shock from the sky",
+    "monitor": "A computer screen",
+    "window": "transparent material used in homes",
+    "picture": "A moment frozen in time",
+    "binary": "Values represented by 0s and 1s, used by computer systems.",
+    "monochrome": "All one colour",
+    "cafeteria": "Somewhere where you can eat",
+    "simplistic": "In a simple style"
 }
 
 # Get the answer for the game from words at random
@@ -39,8 +39,10 @@ completed = False
 guessed_letters = set()
 incorrectletters = set()
 
+
 def update_display(answer, guessed_letters):
     return [letter if letter in guessed_letters else '_' for letter in answer]
+
 
 # Print the initial underscores
 print(''.join(update_display(answerstrip, guessed_letters)))
@@ -68,11 +70,17 @@ while alive:
         print(''.join(update_display(answerstrip, guessed_letters)))
         continue
 
+    # Prevent user from entering a number
+    if guess.isdigit():
+        print("You must enter words!")
+        print(''.join(update_display(answerstrip, guessed_letters)))
+        continue
+
     # Checks if the user guessed a letter correctly
     if guess.lower() in lst:
         print("That is a letter!")
         guessed_letters.add(guess.lower())
-    
+
 
     # but if guess is incorrect, say that it was incorrect and remove a life.
     else:
@@ -80,8 +88,6 @@ while alive:
         lives -= 1
         incorrectletters.add(guess)
 
-
-    
     # checks if the game is over via defeat
     if lives == 0:
         print("You lost the game!")
@@ -99,10 +105,10 @@ while alive:
         print("You win!")
         break
 
-    # print the updated underscore hint after all code is executed, then print the incorrect letters.
+    # print the updated underscore hint after all code is executed, then print the incorrect letters in a clear manner
     print(''.join(update_display(answerstrip, guessed_letters)))
     if lives < 10:
-        print(f"Incorrect letters: {incorrectletters}")
+        print(f"Incorrect letters: {str(incorrectletters).lstrip("{'").rstrip("'}").replace("'", '')}")
 
     # depending on the lives left, print the hangman.
     if lives == 9:
