@@ -80,15 +80,37 @@ while alive:
     # checks if the game is over via defeat
     if lives == 0:
         print("You lost the game!")
+        print("  _____")
+        print("/     |")
+        print("|     |")
+        print("|     O")
+        print("|    -|-")
+        print("|     |")
+        print("|    / \\")
+        print("___")
         alive = False
     # checks if the game is over via victory (whey hey)
     if ''.join(update_display(answerstrip, guessed_letters)) == answerstrip:
         print("You win!")
         break
 
-    # print the updated underscore hint after all code is executed, then print the incorrect letters
+    # print the updated underscore hint after all code is executed, then print the incorrect letters.
     print(''.join(update_display(answerstrip, guessed_letters)))
     print(f"Incorrect letters: {incorrectletters}")
+
+    # depending on the lives left, print the hangman.
+    if lives == 9:
+        print("___")
+    elif lives == 8:
+        print("/")
+        print("|")
+        print("|")
+        print("|")
+        print("|")
+        print("|")
+        print("___")
+
+    
 
 # If not using an IDE, this helps see the result when using native python, QOL thing.
 time.sleep(2)
