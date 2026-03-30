@@ -4,13 +4,13 @@ import time
 # Dictionary with keys (the answers) and the items (Definitions/hints)
 words = {
     "lightning": "A shock from the sky",
-    "monitor": "A computer screen",
-    "window": "transparent material used in homes",
-    "picture": "A moment frozen in time",
-    "binary": "Values represented by 0s and 1s, used by computer systems.",
-    "monochrome": "All one colour",
-    "cafeteria": "Somewhere where you can eat",
-    "simplistic": "In a simple style"
+    "monitor" : "A computer screen",
+    "library" : "Somewhere you can read",
+    "picture" : "A moment frozen in time",
+    "binary" : "Values represented by 0s and 1s, used by computer systems.",
+    "monochrome" : "All one colour",
+    "cafeteria" : "Somewhere where you can eat",
+    "simplistic" : "In a simple style"
 }
 
 # Get the answer for the game from words at random
@@ -39,7 +39,7 @@ completed = False
 guessed_letters = set()
 incorrectletters = set()
 
-
+#return the letter in the place of the underscore if it's in guessed letters (from the user's input), else, return the underscores for the rest of the letters in the answer
 def update_display(answer, guessed_letters):
     return [letter if letter in guessed_letters else '_' for letter in answer]
 
